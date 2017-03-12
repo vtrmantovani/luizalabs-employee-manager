@@ -61,6 +61,48 @@ class TestViewAPICase(BaseTestCase):
         employees = Employee.query.all()
         self.assertEqual(len(employees), 1)
 
+    def test_put_employee(self):
+        params = {
+            "name": "Arnaldo Pereira",
+            "email": "arnalfo@luizalabs.com",
+            "department": "TI"
+        }
+        response = self.client.put("/api/employee/1", data=json.dumps(params), content_type='application/json')
+        self.assertEqual(response.status_code, 200)
+        r = json.loads(response.data.decode('utf-8'))
+        employees = Employee.query.all()
+        self.assertEqual(len(employees), 1)
+        self.assertEqual(r['name'], "Arnaldo Pereira")
+        self.assertEqual(r['email'], "arnalfo@luizalabs.com")
+        self.assertEqual(r['department'], "TI")
+
+    def test_put_employee_conflict(self):
+        employee = Employee(
+            name='Arnaldo Pereira',
+            email='arnalfo@gmail.com',
+            department='Architecture'
+        )
+
+        db.session.add(employee)
+        db.session.commit()
+
+        params = {
+            "name": "Arnaldo Pereira",
+            "email": "arnalfo@gmail.com",
+            "department": "TI"
+        }
+        response = self.client.put("/api/employee/1", data=json.dumps(params), content_type='application/json')
+        self.assertEqual(response.status_code, 409)
+
+    def test_put_employee_not_found(self):
+        params = {
+            "name": "Arnaldo Pereira",
+            "email": "arnalfo@luizalabs.com",
+            "department": "TI"
+        }
+        response = self.client.put("/api/employee/2", data=json.dumps(params), content_type='application/json')
+        self.assertEqual(response.status_code, 404)
+
     def test_delete_employee(self):
         response = self.client.delete("/api/employee/1")
         self.assertEqual(response.status_code, 200)

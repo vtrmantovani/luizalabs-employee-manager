@@ -42,6 +42,25 @@ def post_employee():
     return jsonify(employee.serialize)
 
 
+@api.route('/employee/<employee_id>', methods=['PUT'])
+def put_employee(employee_id):
+    r = request.json
+    employee = Employee.query.filter_by(id=employee_id).first_or_404()
+    employee.name = r['name']
+    employee.email = r['email']
+    employee.department = r['department']
+
+    db.session.add(employee)
+
+    try:
+        db.session.commit()
+    except IntegrityError as e:
+        db.session.rollback()
+        raise Conflict("Integrity error: {0}".format(str(e)))
+
+    return jsonify(employee.serialize)
+
+
 @api.route('/employee/<employee_id>', methods=['DELETE'])
 def delete_employee(employee_id):
     employee = Employee.query.filter_by(id=employee_id).first_or_404()

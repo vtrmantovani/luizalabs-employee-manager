@@ -11,3 +11,8 @@ def index():
     return jsonify({"service": "Luizalabs Employee Manager",
                     "version": "1.0"})
 
+
+@api.route('/employee', methods=['GET'])
+def get_employee_list():
+    employees = Employee.query.all()
+    return jsonify(employees=[i.serialize for i in employees])

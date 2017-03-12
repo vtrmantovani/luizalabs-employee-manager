@@ -15,6 +15,13 @@ class BaseConfig(object):
     SQLALCHEMY_POOL_RECYCLE = 100
 
 
+class TestingConfig(BaseConfig):
+    DEBUG = True
+    TESTING = True
+    SQLALCHEMY_DATABASE_URI = 'sqlite:///:memory:'
+    SQLALCHEMY_POOL_SIZE = None
+
+
 class DevelopmentConfig(BaseConfig):
     DEBUG = True
     LOGS_LEVEL = logging.DEBUG

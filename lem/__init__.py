@@ -57,10 +57,12 @@ def configure_logger(app):
 def register_blueprints_and_error_handling(app):
     from lem.views.common import common, forbidden, internal_server_error, not_found
     app.register_blueprint(common)
-
     app.register_error_handler(Forbidden.code, forbidden)
     app.register_error_handler(InternalServerError.code, internal_server_error)
     app.register_error_handler(NotFound.code, not_found)
+
+    from lem.views.api import api
+    app.register_blueprint(api)
 
 
 def setup_login_manager():

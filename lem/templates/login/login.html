@@ -1,0 +1,23 @@
+{% extends "login/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+ <div class="login-box-body">
+    <form method="POST" role="form" action="{{ url_for('common.login') }}">
+        {{ form.hidden_tag() }}
+        {{ wtf.form_errors(form, hiddens="only") }}
+      <div class="form-group has-feedback">
+          {{ wtf.form_field(form.email) }}
+      </div>
+      <div class="form-group has-feedback">
+          {{ wtf.form_field(form.password) }}
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <button type="submit" class="btn btn-primary btn-block btn-flat">Logar</button>
+        </div>
+      </div>
+    </form>
+      <br>
+  </div>
+{% endblock %}

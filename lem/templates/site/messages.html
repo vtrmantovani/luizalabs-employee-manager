@@ -1,0 +1,16 @@
+{% set visuals = {'error': 'danger'} %}
+{% with messages = get_flashed_messages(with_categories=true) %}
+    {% for category, msg in messages %}
+        {% if category %}
+            <div {% if msg.msg_id %}id="{{ msg.msg_id }}"{% endif %} class="alert alert-{{ visuals.get(category, category) }}">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                {{ msg }}
+            </div>
+        {% else %}
+            <div {% if msg.msg_id %}id="{{ msg.msg_id }}"{% endif %} class="alert alert-danger">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                {{ msg }}
+            </div>
+        {% endif %}
+    {% endfor %}
+{% endwith %}

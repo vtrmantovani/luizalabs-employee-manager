@@ -12,12 +12,12 @@
       <!-- User Account: style can be found in dropdown.less -->
       <li class="dropdown user user-menu">
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-          <span>vtrmantovani@gmail.om</span>
+          <span>{{ current_user.email }}</span>
         </a>
         <ul class="dropdown-menu">
           <li class="user-footer">
             <div class="pull-right">
-              <a href="#" class="btn btn-default btn-flat">Sair</a>
+              <a href="{{ url_for('common.logout') }}" class="btn btn-default btn-flat">Sair</a>
             </div>
           </li>
         </ul>

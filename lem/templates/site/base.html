@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{% if site_title %}{{site_title}} | {% endif %}Luizalabs Employee Manager</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}" />
+    {% block css %}
+        {% include "site/css.html" %}
+    {% endblock %}
+
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<!-- Site wrapper -->
+<div class="wrapper">
+
+  <header class="main-header">
+    <!-- Logo -->
+    <a href="{{ url_for('common.home') }}" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b>LEM</b></span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>Employee Manager</b></span>
+    </a>
+    <!-- Header Navbar: style can be found in header.less -->
+    {% block header %}
+        {% include "site/header.html" %}
+    {% endblock %}
+  </header>
+
+  <!-- =============================================== -->
+
+  <!-- Left side column. contains the sidebar -->
+    {% block nav %}
+        {% include "site/nav.html" %}
+    {% endblock %}
+
+  <!-- =============================================== -->
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+
+    <!-- Content Header (Page header) -->
+    {% block pageTitle %}
+    <section class="content-header">
+      <h1>{% block pageTitleContent %}{% endblock pageTitleContent %}</h1>
+    </section>
+    {% endblock pageTitle %}
+
+    {% block content %}
+    {% endblock content %}
+  </div>
+
+  {% block footer %}
+      {% include "site/footer.html" %}
+  {% endblock %}
+</div>
+<!-- ./wrapper -->
+
+{# script is shared site JavaScript #}
+{% block body_end_script %}
+    {% if not js_in_head %}
+      {% include "site/javascript.html" %}
+    {% endif %}
+{% endblock body_end_script %}
+</body>
+</html>

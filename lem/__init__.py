@@ -3,6 +3,8 @@ import os
 import sys
 
 from flask import Flask
+from werkzeug.exceptions import Forbidden, InternalServerError, NotFound
+
 
 logger = logging.getLogger(__name__)
 
@@ -27,5 +29,8 @@ def configure_logger(app):
 
 
 def register_blueprints_and_error_handling(app):
-    from lem.views.common import common
+    from lem.views.common import common, forbidden, internal_server_error, not_found
     app.register_blueprint(common)
+    app.register_error_handler(Forbidden.code, forbidden)
+    app.register_error_handler(InternalServerError.code, internal_server_error)
+    app.register_error_handler(NotFound.code, not_found)

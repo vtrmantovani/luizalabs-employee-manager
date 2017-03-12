@@ -1,0 +1,19 @@
+{% extends "site/base.html" %}
+
+{% block content %}
+<div class="error-page">
+    <br>
+    <h2 class="headline text-red">500</h2>
+    <div class="error-content">
+        <br>
+      <h3><i class="fa fa-warning text-red"></i> Oops! Ocorreu um erro no servidor.</h3>
+      <p>
+          {% if current_user.is_authenticated %}
+            <a href="{{ url_for('common.home') }}" class="btn btn-block btn-success"> Ir para o início </a>
+          {% else %}
+            <a href="{{ url_for('common.login') }}" class="btn btn-block btn-success"> Login </a>
+          {% endif %}
+      </p>
+    </div>
+</div>
+{% endblock content %}

@@ -40,3 +40,11 @@ def post_employee():
         raise Conflict("Integrity error: {0}".format(str(e)))
 
     return jsonify(employee.serialize)
+
+
+@api.route('/employee/<employee_id>', methods=['DELETE'])
+def delete_employee(employee_id):
+    employee = Employee.query.filter_by(id=employee_id).first_or_404()
+    db.session.delete(employee)
+    db.session.commit()
+    return ''

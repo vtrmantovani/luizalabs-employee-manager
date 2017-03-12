@@ -60,3 +60,15 @@ class TestViewAPICase(BaseTestCase):
         self.assertEqual(response.status_code, 409)
         employees = Employee.query.all()
         self.assertEqual(len(employees), 1)
+
+    def test_delete_employee(self):
+        response = self.client.delete("/api/employee/1")
+        self.assertEqual(response.status_code, 200)
+        employees = Employee.query.all()
+        self.assertEqual(len(employees), 0)
+
+    def test_delete_employee_not_found(self):
+        response = self.client.delete("/api/employee/2")
+        self.assertEqual(response.status_code, 404)
+        employees = Employee.query.all()
+        self.assertEqual(len(employees), 1)

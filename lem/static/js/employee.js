@@ -1,7 +1,4 @@
 var Employee = function () {
-    var bindEvents = function () {
-        $('#btnNew').click(Employee.create);
-    };
     var handleRecords = function () {
         $('#datatable_employees').DataTable( {
             "sAjaxDataProp":"employees",
@@ -29,10 +26,6 @@ var Employee = function () {
         init: function (options) {
             this.options = options;
             handleRecords();
-            bindEvents();
-        },
-        create: function () {
-            alert('Criar Empregado');
         },
         edit: function (id){
             alert(id);

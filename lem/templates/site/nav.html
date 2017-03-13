@@ -4,11 +4,8 @@
   <!-- sidebar menu: : style can be found in sidebar.less -->
   <ul class="sidebar-menu">
       <li class="header">MENU</li>
-      <li {% if request.endpoint  == 'employee.index' %} class="active" {% endif %}>
+      <li {% if request.endpoint in ['employee.index', 'employee.create'] %} class="active" {% endif %}>
           <a href="{{ url_for('employee.index') }}"><i class="fa fa-users"></i> <span>Empregados</span></a>
-      </li>
-      <li>
-          <a href="#"><i class="fa fa-gear"></i> <span>Usuários</span></a>
       </li>
   </ul>
 </section>

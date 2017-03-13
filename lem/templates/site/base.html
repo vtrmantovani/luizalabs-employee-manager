@@ -41,16 +41,16 @@
 
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
-
     <!-- Content Header (Page header) -->
     {% block pageTitle %}
-    <section class="content-header">
-      <h1>{% block pageTitleContent %}{% endblock pageTitleContent %}</h1>
-    </section>
+      <section class="content-header">
+          <h1>{% block pageTitleContent %}{% endblock pageTitleContent %}</h1>
+      </section>
     {% endblock pageTitle %}
-
-    {% block content %}
-    {% endblock content %}
+    <section class="content">
+        {% block content %}
+        {% endblock content %}
+    </section>
   </div>
 
   {% block footer %}

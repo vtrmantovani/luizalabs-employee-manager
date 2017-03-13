@@ -64,6 +64,9 @@ def register_blueprints_and_error_handling(app):
     from lem.views.api import api
     app.register_blueprint(api)
 
+    from lem.views.employee import employee
+    app.register_blueprint(employee)
+
 
 def setup_login_manager():
     from lem.models import User

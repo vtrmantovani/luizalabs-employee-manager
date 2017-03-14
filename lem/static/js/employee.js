@@ -31,7 +31,16 @@ var Employee = function () {
             alert(id);
         },
         remove: function (id) {
-            alert(id);
+            $.ajax({
+                type : "POST",
+                url: Employee.options.removeUrl,
+                data: JSON.stringify({employee_id: id.toString()}),
+                contentType: 'application/json;charset=UTF-8',
+                }).done(function () {
+                    window.location.reload();
+            }).fail(function () {
+                alert('Erro ao chamar a API');
+            });
         }
     };
 }();

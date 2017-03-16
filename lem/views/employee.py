@@ -2,6 +2,7 @@ import json
 
 import flask
 from flask import Blueprint, request, redirect, url_for
+from flask_login import login_required
 
 from lem import db
 from lem.forms import EmployeeForm
@@ -12,11 +13,13 @@ employee = Blueprint('employee', __name__, url_prefix='/employee')
 
 
 @employee.route('/', methods=['GET'])
+@login_required
 def index():
     return flask.render_template('employee/list.html')
 
 
 @employee.route('/create', methods=['GET', 'POST'])
+@login_required
 def create():
     employeeForm = EmployeeForm()
     if request.method == 'POST':
@@ -39,6 +42,7 @@ def create():
 
 @employee.route('/edit', methods=['GET', 'POST'])
 @employee.route('/edit/<employee_id>',  methods=['GET'])
+@login_required
 def edit(employee_id=None):
     employeeForm = EmployeeForm()
     if not employee_id:
@@ -66,6 +70,7 @@ def edit(employee_id=None):
 
 @requires_json
 @employee.route('/remove', methods=['POST'])
+@login_required
 def remove():
     data = json.loads(request.data.decode('utf-8'))
     employee = Employee.query.filter_by(id=data['employee_id']).first_or_404()

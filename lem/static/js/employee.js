@@ -14,7 +14,7 @@ var Employee = function () {
                 { "data": "department" },
                 {
                     data: function (row) {
-                        return '<a href="javascript:Employee.edit(\'' + row.id + '\');" class="btn btn-info" ><i class="fa fa-edit"></i></a> <a href="javascript:Employee.remove(\'' + row.id + '\');" class="btn btn-danger"><i class="fa fa-remove"></i></a>';
+                        return '<a href="' + Employee.options.editUrl + '/'  + row.id + '" class="btn btn-info" ><i class="fa fa-edit"></i></a> <a href="javascript:Employee.remove(\'' + row.id + '\');" class="btn btn-danger"><i class="fa fa-remove"></i></a>';
                     }
                 }
             ]
@@ -26,9 +26,6 @@ var Employee = function () {
         init: function (options) {
             this.options = options;
             handleRecords();
-        },
-        edit: function (id){
-            alert(id);
         },
         remove: function (id) {
             $.ajax({

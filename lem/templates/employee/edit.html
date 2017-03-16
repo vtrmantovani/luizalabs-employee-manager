@@ -2,7 +2,7 @@
 {% import "bootstrap/wtf.html" as wtf %}
 
 {% block pageTitleContent %}
-    Criar novo Empregado
+    Editar {{employee.name}}
 {% endblock pageTitleContent %}
 
 {% block css %}
@@ -19,8 +19,8 @@
         </div>
           <div class="box">
             <div class="box-body">
-                <form method="POST" role="form" action="{{ url_for('employee.create') }}">
-                    <div class="modal-body">
+                 <form method="POST" role="form" action="{{ url_for('employee.edit', id=employee.id) }}">
+                  <div class="modal-body">
                       {{ form.hidden_tag() }}
                       {{ wtf.form_errors(form, hiddens="only") }}
                       <div class="form-group has-feedback">
@@ -32,11 +32,11 @@
                       <div class="form-group has-feedback">
                           {{ wtf.form_field(form.department) }}
                       </div>
-                    </div>
-                    <div class="modal-footer">
-                        <a href="{{ url_for('employee.index') }}" class="btn btn-danger" data-dismiss="modal">Voltar</a>
-                        <button type="submit" class="btn btn-primary">Salvar</button>
-                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <a href="{{ url_for('employee.index') }}" class="btn btn-danger" data-dismiss="modal">Voltar</a>
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                  </div>
                 </form>
             </div>
           </div>

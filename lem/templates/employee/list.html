@@ -68,6 +68,7 @@
         $(document).ready(function () {
             Employee.init({
                 fetchUrl: '{{ url_for('api.get_employee_list') }}',
+                editUrl:  '{{ url_for('employee.edit') }}',
                 removeUrl: '{{ url_for('employee.remove') }}',
             });
         });
